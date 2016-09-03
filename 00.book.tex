@@ -49,21 +49,101 @@ Maksud dari ketiga layanan tersebut adalah sebagai berikut :
   
   \item Pencatatan Pembayaran
   
-  Layanan ini digunakan oleh Bank sebagai tempat pembayaran untuk melakukan pencatatan pembayaran pada basis data yang berada di DPPK Kabupaten Brebes.
+  Layanan ini digunakan oleh Bank sebagai tempat pembayaran untuk melakukan pencatatan pembayaran pada basis data yang berada di DPPK Kabupaten Brebes. Layanan ini akan otomatis melakukan pencatatan pembayaran pada basis data SISMIOP dengan tentu saja memberikan respon berupa informasi nomor objek mana yang dicatatkan pembayarannya, atas nama siapa pajak bumi dan bangunan terbayarkan, dan berapa jumlah tagihan yang terbayar.
   
   \item Pembatalan Pembayaran
+  
+  Layanan ini digunakan oleh Bank sebagai tempat pembayaran untuk melakukan pembatalan pembayaran apabila proses pencatatan pembayaran yang diminta oleh Bank sebagai tempat pembayaran telah mencapai batas waktu \textit{timeout} yang telah ditetapkan oleh Bank tetapi layanan \textit{web services} yang berada di DPPK belum memberikan respon. Atau ada kondisi lain yang menyebabkan pencatatan pembayaran harus dibatalkan.
+  
 \end{enumerate}
 
+Hal-hal yang mendukung studi kelayakan dibangunnya sistem \textit{web services} untuk pencatatan pembayaran PBB-P2 adalah dari kondisi-kondisi berikut :
 
 \begin{enumerate}[1.]
 \item Wawancara
 
+Hal ini dilakukan guna memperkuat kebutuhan akan adanya layanan pencatatan pembayaran yang akurat dan dengan data terkini (atau dengan istilah lain adalah \textit{realtime}). Ini dibutuhkan terutama untuk pengambilan keputusan atau kebijakan bila misalkan suatu saat dilakukan kegiatan intensifikasi ke sebuah Desa / Kecamatan, akan terlihat efektif bila dalam masa beberapa waktu setelah kegiatan intensifikasi, seharusnya ada peningkatan realisasi pembayaran untuk Desa / Kecamatan tersebut.
 
-\item Pengumpulan Bahan-Bahan
+Dari hasil wawancara maka dapat disimpulkan bahwa beberapa keinginan yang diharapkan dari sistem pencatatan \textit{realtime} ini (atau dikenal dengan sistem \textit{host-to-host}), adalah sebagai berikut :
+
+\begin{enumerate}
+  \item Tersedianya sumber data yang akurat dan konsisten untuk menunjukkan piutang dan realisasi.
+  
+  \item Dapat tersedianya realisasi pembayaran waktu nyata atau \textit{realtime} guna pengambilan keputusan / kebijakan.
+  
+  \item Pembayaran yang tercatat langsung secara waktu nyata atau \textit{realtime} dapat digunakan sebagai informasi pertanggungjawaban langsung kepada wajib pajak atau kuasanya dalam melakukan kontrol terhadap pembayaran-pembayaran yang dilakukan melalui petugas pemungut.
+\end{enumerate}
+
+\item Pengumpulan Bukti Pendukung
+
+Data pendukung lain untuk memperkuat asumsi-asumsi atau pendapat dari hasil wawancara adalah dengan pengumpulan bukti-bukti yang dapat disimpulkan sebagai berikut :
+
+\begin{enumerate}
+
+\item Bahwa data antara SISMIOP (basis data yang berada di DPPK), dengan Cash Management System (CMS) yaitu basis data yang berada di Bank sebagai tempat pembayaran, ada selisih baik kondisi pada jumlah objek piutang dan besarnya nilai piutang, serta jumlah objek pembayaran dan besarnya nilai pembayaran yang tercatat.
+
+\item Bahwa masih adanya penyalahgunaan kewenangan petugas pemungut dalam melakukan pemungutan PBB-P2 dan penyetoran hasil pemungutannya ke Bank sebagai tempat pembayaran.
+
+\item Bahwa masih adanya selisih waktu pencatatan pembayaran antara basis data yang berada di DPPK dan Bank sebagai tempat pembayaran, yang ini tidak dapat diubah karena menjadi keterbatasan sistem bahwa data-data nomor objek pajak yang telah dibayarkan baru dapat diambil dan dipindahkan ke sistem basis data SISMIOP di DPPK setelah melalui waktu \textit{cut-off} yang ditetapkan Bank sebagai tempat pembayaran.
 
 \end{enumerate}
 
+\end{enumerate}
+
+Dari data-data tersebut, maka sudah seharusnya bentuk sistem \textit{host-to-host} dibangun, karena bukan hanya akan mendapatkan nilai realisasi pembayaran dalam waktu nyata (\textit{realtime}) melainkan konsistensi data yang terjaga dalam satu basis data. Sebagai nilai lebih adalah dapat digunakan sebagai sebuah alat atau media pertanggungjawaban petugas pemungut PBB-P2 dalam melakukan penyetoran hasil pemungutannya ke Bank sebagai tempat pembayaran.
+
 \section{SARANA DAN PRASARANA YANG MELIPUTI PERANGKAT KERAS DAN PERANGKAT LUNAK YANG DIPERLUKAN}
+
+Sebagai sebuah sistem yang utuh, maka diperlukan subsistem pembentuknya agar keseluruhan sistem dapat bekerja dengan baik. Tentu karena yang dibangun adalah sebuah sistem layanan (\textit{service}) yang menggunakan teknologi informasi, maka tidak akan lepas dari kebutuhan perangkat lunak dan perangkat keras yang mendukungnya. Kebutuhan akan perangkat lunak dan perangkat keras tersebut disebutkan sebagai berikut :
+
+\begin{enumerate}
+
+\item \textbf{Perangkat Lunak}
+
+Perangkat lunak sebagai pembentuk sistem layanan \textit{web services} ini berjalan adalah sebagai berikut :
+
+\begin{enumerate}
+  \item Basis Data
+  
+  
+  
+  \item Text Editor 
+  \item Pustaka (\textit{Library})
+  \item \textit{Servlet Container}
+\end{enumerate}
+
+\item \textbf{Perangkat Keras}
+
+Perangkat keras yang membentuk sistem layanan \textit{web services} ini berjalan adalah sebagai berikut :
+
+\begin{enumerate}
+  \item Server Basis Data
+  \item Server Aplikasi
+  \item Router
+  \item VPN Server
+\end{enumerate}
+
+\item \textbf{Akses Internet}
+
+Hal lain yang mendukung sistem layanan ini dapat bekerja adalah akses internet dengan kemampuan yang mencukupi. Artinya, lebar pita \textit{bandwidth} harus mencukupi untuk transaksi menerima dan memberikan respon.
+
+Sebagai contoh simulasi kasar dalam penggunaan \textit{bandwidth} akses internet ini adalah sebagai berikut, dari sejarah data yang terekam sejak pengalihan PBB-P2 ke Daerah, transaksi terbanyak dalam periode harian adalah 21.165 transaksi, yaitu ditanggal 29 Agustus 2014, bila dalam sekali proses pencatatan transaksi pembayaran PBB-P2, data yang dikirim oleh Bank sebagai tempat pembayaran hanya berupa Nomor Objek Pajak dan Tahun Pajak yang diinginkan, Nomor Objek Pajak berjumlah 18 karakter, dan tahun pajak berjumlah 4 karakter, dengan total 22 karakter, jika 1 karakter = 1 byte, maka dibutuhkan 22 byte untuk sekali mengunduh atau menerima data transaksi, untuk tanggal kritis seperti di tanggal 29 Agustus 2014 kebutuhan akan unduh atau menerima data permintaan pencatatan pembayaran data transaksi hanya sebesar 455 kB (\textit{kilo bytes}). Namun berbeda untuk kasus respon atau mengunggah data hasil pencatatan transaksi pembayaran yang sukses, bila data yang dikirim dari server DPPK ke Server Bank sebagai tempat pembayaran memiliki struktur berikut :
+
+\begin{itemize}
+  \item Nomor Objek Pajak = 18 karakter
+  \item Tahun Pajak = 4 karakter
+  \item Nomor Transaksi Penerimaan Daerah = 16 karakter
+  \item Jumlah Pembayaran Pokok = 12 karakter
+  \item Jumlah Pembayaran Denda = 12 karakter
+  \item Nama Wajib Pajak = 30 karakter
+  \item Alamat Objek Pajak = 45 karakter
+\end{itemize}
+
+Maka untuk menjawab atau merespon sebuah permintaan transaksi pembayaran akan membutuhkan lebar pita sebanyak 137 karakter atau 137 \textit{byte}. Dengan perhitungan terburuk, dalam rangka menjaga ketersediaan layanan dalam merespon suatu permintaan, maka bahwa transaksi pada tanggal 29 Agustus 2014 terjadi pada waktu yang bersamaan, akan dibutuhkan lebar pita (\textit{bandwidth}) sebanyak 2.899.605 \textit{byte}, bila 1 kB adalah 1.024\textit{byte}, dan 1 MB adalah 1.024 \textit{kB}, maka dihasilkan kebutuhan lebar pita (\textit{bandwidth}) sebesar 2,77 MB. Ini adalah lebar pita (\textit{bandwidth}) minimal yang dibutuhkan, untuk menjaga apabila suatu saat kedepan akan ditemukan jumlah transaksi yang jauh lebih besar dari kejadian di tanggal 29 Agustus 2014.
+
+Selain lebar pita (\textit{bandwidth}) seperti dijelaskan diatas, untuk menjaga ketersediaan sambungan / koneksi, maka diperlukan 2 (dua) atau lebih sambungan atau koneksi internet dengan penyedia jasa yang berbeda. Hal ini untuk menjaga apabila salah satu koneksi internet mengalami kegagalan sambungan atau ada permasalahan lain sehingga koneksi gagal terjalin, maka sambungan atau koneksi dari penyedia jasa yang lain yang masih memiliki koneksi akan menggantikan posisi jaringan yang sedang bermasalah. Sehingga dalam fungsinya sebagai penyedia layanan \textit{web services} dapat memberikan layanan yang maksimal selama 24 jam sehari, sepanjang 7 hari dalam seminggu.
+
+\end{enumerate}
 
 
 \section{SUMBER DAYA MANUSIA YANG TERLIBAT DALAM PENGOLAHAN DATA}
