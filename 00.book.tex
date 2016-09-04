@@ -105,10 +105,18 @@ Perangkat lunak sebagai pembentuk sistem layanan \textit{web services} ini berja
 \begin{enumerate}
   \item Basis Data
   
-  Sebagaimana sebuah sistem yang melakukan pengolahan data, maka diperlukan tempat untuk menyimpan data-data tersebut yang biasa dikenal dengan basis data (\textit{database}). Karena sistem layanan \textit{web services} ini akan mencatatkan langsung permintaan sebuah transaksi pembayaran, maka basis data yang digunakan oleh sistem layanan \textit{web services} ini sama dengan basis data yang digunakan dalam pengelolaan objek dan subjek pajak PBB-P2, yaitu SISMIOP, sistem basis data ini menggunakan sistem basis data Oracle 11g yang tentu saja berada di DPPK Kabupaten Brebes.
+  Sebagaimana sebuah sistem yang melakukan pengolahan data, maka diperlukan tempat untuk menyimpan data-data tersebut yang biasa dikenal dengan basis data (\textit{database}). Karena sistem layanan \textit{web services} ini akan mencatatkan langsung permintaan sebuah transaksi pembayaran, maka basis data yang digunakan oleh sistem layanan \textit{web services} ini sama dengan basis data yang digunakan dalam pengelolaan objek dan subjek pajak PBB-P2, yaitu SISMIOP, sistem basis data ini menggunakan sistem basis data Oracle 11g yang tentu saja berada di DPPK Kabupaten Brebes. Hanya saja, dalam pengoperasiannya, perlu adanya perubahan struktur basis data di SISMIOP atau lebih tepatnya penambahan tabel dan prosedur dalam basis data SISMIOP agar layanan \textit{web services} dapat mencatatkan transaksi pembayaran lebih cepat dan historis dari kegiatan layanan \textit{web services} ini tercatat.
   
-  \item Text Editor 
+  \item \textit{Text Editor}
+  
+  Tentunya untuk membangun sebuah sistem aplikasi yang terdiri dari susunan kode-kode program, dibutuhkan \textit{text editor} atau \textit{Integrated Development Environment} (\textit{IDE}), untuk penggunaan \textit{text editor} sendiri banyak yang menawarkan secara gratis, mulai dari vi, vim, emacs, notepad, atau perangkat lunak lain yang bertugas sebagai \textit{text editor} pasti dapat digunakan sebagai salah satu alat untuk membangun sistem aplikasi ini. Untuk IDE adalah sebuah perangkat lunak dengan dukungan fasilitas yang lebih lengkap dibandingkan sebuah \textit{text editor} biasa, hal umum yang biasa ditawarkan oleh sebuah IDE adalah \textit{highligth} dari kode-kode yang ditulis sehingga memudahkan dalam pembacaan kode program, bahkan ada yang menyertakan fasilitas \textit{code snippets} sehingga seorang pemrogram tidak perlu terlalu sering untuk melihat dokumentasi sebuah modul karena secara otomatis, IDE akan memberikan informasinya seketika saat pemrogram kebingungan tentang apa nama fungsi atau prosedur  yang akan digunakan.
+  
+  IDE ini pun banyak yang menyediakan secara gratis dan selalu diperbaharui secara berkala. Salah satunya adalah Eclipse.
+  
   \item Pustaka (\textit{Library})
+  
+  Pustaka atau \textit{library} adalah modul modul pendukung terbangunnya sebuah sistem aplikasi layanan \textit{web services} ini.
+  
   \item \textit{Servlet Container}
 \end{enumerate}
 
@@ -146,6 +154,8 @@ Lebar pita atau \textit{bandwidth} yang diperlukan ini adalah lebar pita atau \t
 Selain lebar pita (\textit{bandwidth}) seperti dijelaskan diatas, untuk menjaga ketersediaan sambungan / koneksi, maka diperlukan 2 (dua) atau lebih sambungan atau koneksi internet dengan penyedia jasa yang berbeda. Hal ini untuk menjaga apabila salah satu koneksi internet mengalami kegagalan sambungan atau ada permasalahan lain sehingga koneksi gagal terjalin, maka sambungan atau koneksi dari penyedia jasa yang lain yang masih memiliki koneksi akan menggantikan posisi jaringan yang sedang bermasalah. Sehingga dalam fungsinya sebagai penyedia layanan \textit{web services} dapat memberikan layanan yang maksimal selama 24 jam sehari, sepanjang 7 hari dalam seminggu.
 
 Skenario lain yang dapat digunakan untuk menjaga ketersediaan sambungan atau koneksi atau dalam istilah kerennya adalah \textit{availability} yaitu dengan membangun \textit{server} lain yang berbeda lokasi secara geografis. Tentunya membangun sebuah \textit{server} di luar DPPK Kabupaten Brebes akan membutuhkan biaya yang tidak sedikit. Namun dengan perkembangan teknologi informasi sekarang ini, layanan yang mungkin digunakan secara lebih efektif dan efisien adalah menggunakan layanan \textit{cloud} atau komputer awan. Layanan \textit{cloud} ini sebetulnya berbentuk \textit{server} virtual yang secara fisik terdiri dari beberapa server yang digabung menjadi sebuah layanan \textit{cloud}, sebuah \textit{server} virtual di \textit{cloud} akan memanfaatkan \textit{resources} atau sumber daya yang optimal dari \textit{server-server} fisik yang menyusunnya.
+
+Dengan menggunakan layanan \textit{cloud} ini, maka bukan hanya melakukan penjagaan terhadap koneksi internet, tetapi juga melakukan duplikasi data sehingga apabila ada kerusakan data di \textit{server} basis data DPPK maka data tetap utuh berada di server basis data \textit{cloud}. Secara kasar mungkin akan terlihat mirip dengan sistem \textit{single host} yang sekarang digunakan, yaitu ada \textit{server} basis data di DPPK, dan ada \textit{server} basis data di Bank tempat pembayaran, yang membedakan adalah pada sistem \textit{single host}, struktur basis data di DPPK dan struktur basis data di Bank tempat pembayaran berbeda sangat jauh, sedangkan pada layanan \textit{cloud} antara struktur basis data di DPPK dan struktur basis data di \textit{server cloud} sama persis sehingga dapat dilakukan teknik \textit{mirroring} atau penyamaan data antara basis data di DPPK dan layanan \textit{server cloud}.
 
 \end{enumerate}
 
