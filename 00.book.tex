@@ -115,7 +115,62 @@ Perangkat lunak sebagai pembentuk sistem layanan \textit{web services} ini berja
   
   \item Pustaka (\textit{Library})
   
-  Pustaka atau \textit{library} adalah modul modul pendukung terbangunnya sebuah sistem aplikasi layanan \textit{web services} ini.
+  Pustaka atau \textit{library} adalah modul modul pendukung terbangunnya sebuah sistem aplikasi layanan \textit{web services} ini. Pustaka atau \textit{library} yang dibutuhkan sistem aplikasi ini cukup menggunakan yang gratis, namun tentu saja, handal dalam melaksanakan tugasnya.
+  
+  Sebagai inti yang membangun sistem aplikasi ini, nantinya akan menggunakan \textit{framework} Spring, Spring ini merupakan \textit{framework} yang digunakan untuk membangun sebuah aplikasi \textit{enterprise}, termasuk \textit{framework} yang ringan untuk mendukung secara penuh dalam pengembangan aplikasi \textit{enterprise}.
+  
+  Spring dapat digunakan untuk melakukan pengaturan deklarasi manajemen transaksi, \textit{remote access} dengan menggunakan RMI, atau layanan web lainnya. Spring juga memungkinkan untuk menggunakan hanya modul-modul tertentu sehingga tidak perlu menggunakan semua modul spring dalam aplikasi apabila tidak diperlukan.
+  
+  Adapun fitur yang ditawarkan oleh \textit{framework} spring adalah sebagai berikut :
+  
+  \begin{itemize}
+    \item \textit{Transaction Management}, dimana Spring \textit{framework} menyediakan sebuah lapisan / \textit{layer} abstrak yang umum untuk manajemen transaksi, sehingga memudahkan \textit{developer} dalam melakukan manajemen transaksi.
+    \item JDBC \textit{Exception Handling} : yaitu lapisan / \textit{layer} abstrak JDBC yang menawarkan \textit{exception} yang bersifat hierarki sehingga memudahkan penanganan kesalahan.
+    \item Spring menawarkan layanan integrasi yang terbaik dengan Hibernate, JDO, dan iBatis.
+    \item MVC \textit{Framework} : dimana Spring hadir dengan \textit{framework} aplikasi web MVC yang dibangun di atas inti Spring. Spring merupakan \textit{framework} yang sangat fleksibel dalam pengaturan strategi \textit{interface}, dan mengakomodasi beberapa teknologi \textit{view} seperti JSP, Velocity, Tiles, iText, dan POI.
+  \end{itemize}
+  
+  Arsitektur dari \textit{framework} Spring ini terbagi menjadi beberapa bagian, yaitu sebagai berikut :
+  
+  \begin{enumerate}[1)]
+    \item Spring Core Container
+    
+    Spring \textit{Core Container} terdiri dari modul-modul \textit{spring-core}, \textit{spring-beans}, \textit{spring-context}, \textit{spring-context-support}, dan \textit{spring-expression}.
+    
+    Modul \textit{spring-core} dan \textit{spring-beans} adalah dasar dari \textit{framework} Spring ini, termasuk di dalamnya adalah fitur IoC dan \textit{Dependency Injection}. \textit{BeanFactory} adalah implementasi paling mutakhir dari pola bawaanya. Kondisi ini menghapuskan kebutuhan pembuatan kerangka program dan menjadikan pemisahan antara ketergantungan konfigurasi dan spesifikasi dari logika program sesungguhnya.
+    
+    Modul \textit{spring-context} digunakan untuk mengakses objek dengan cara \textit{framework} yang mirip dengan cara JNDI \textit{registry}. Sedangkan modul \textit{spring-context-support} memberikan dukungan integrasi pada pustaka / \textit{library} pihak ke-3 untuk berjalan pada aplikasi Spring untuk \textit{caching} (seperti menggunakan EhCache, Guava, JCache), \textit{mailing} (seperti JavaMail), \textit{scheduling} (seperti CommonJ dan Quartz), dan \textit{template engines} (seperti FreeMarker, JasperReports, Velocity).
+    
+    Sedangkan modul \textit{spring-expressiong} memberikan kemampuan handal dalam bahasa Expression untuk melakukan \textit{query} dan manipulasi objek grafik saat \textit{runtime}.
+    
+    \item Spring AOP dan Instrumentasi
+    
+    Modul \textit{spring-aop} memberikan kemampuan untuk melakukan AOP (Aspect Oriented Programming) yang implementasinya memungkinkan untuk mendefinisikan \textit{method interceptor} dan \textit{pointcut} untuk memperjelas pemisahan kode yang mengimplementasikan fungsionalitas yang seharusnya dipisahkan.
+    
+    Secara terpisah modul \textit{spring-aspects} memberikan integrasi terhadap AspectJ.
+    
+    Sedangkan modul \textit{spring-instrument} memberikan dukungan instrumen yang dapat digunakan dibeberapa aplikasi \textit{server}.
+    
+
+    \item Spring Messaging    
+    
+    Sejak \textit{Framework} Spring 4, terdapat modul \textit{spring-messaging} dengan abstraksi kunci dari \textit{Spring Integration} seperti \textit{Message}, \textit{MessageChannel}, \textit{MessageHandler}, dan lainnya untuk memberikan layanan bagi aplikasi yang berbasis pesan (\textit{messaging}). Modul ini juga menyertakan beberapa anotasi untuk memetakan pesan ke \textit{method}, mirip seperti model pemrograman anotasi di Spring MVC.
+    
+    
+    \item Spring Data Access / Integration
+    
+    baca disini -
+    \begin{verbatim}
+    http://docs.spring.io/spring/docs/current/spring-framework-reference/html/overview.html#overview-core-container
+    \end{verbatim}
+    
+    \item Spring Web
+    
+    
+    \item Spring Test
+    
+    
+  \end{enumerate}
   
   \item \textit{Servlet Container}
 \end{enumerate}
