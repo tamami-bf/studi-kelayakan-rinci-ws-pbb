@@ -159,20 +159,74 @@ Perangkat lunak sebagai pembentuk sistem layanan \textit{web services} ini berja
     
     \item Spring Data Access / Integration
     
-    baca disini -
-    \begin{verbatim}
-    http://docs.spring.io/spring/docs/current/spring-framework-reference/html/overview.html#overview-core-container
-    \end{verbatim}
+    Lapisan \textit{Data access / Integration} terdiri dari modul modul JDBC, ORM, OXM, JMLS, dan \textit{Transaction}.
+    
+    Modul \textit{spring-jdbc} menyediakan lapisan abstraksi JDBC yang menghilangkan \textit{coding} membosankan dari JDBC yang menguraikan kode error dari tiap sistem basis data yang berbeda.
+    
+    Modul \textit{spring-tx} mendukung manajemen transaksi terprogram dan deklaratif untuk kelas-kelas yang mengimplementasikan \textit{interface} khusus, dan semua POJO (\textit{Plain Old Java Objects}.
+    
+    Modul \textit{spring-orm} memberikan dukungan lapisan integrasi dari API pemetaan objek relasional, termasuk diantaranya JPA, JDO, dan Hibernate. Modul \textit{spring-orm} dapat digunakan untuk seluruh \textit{framework} pemetaan objek relasional yang dikombinasikan dengan seluruh fitur yang Spring sediakan seperti salah satu contohnya adalah fitur manajemen transaksi deklaratif sederhana yang disebutkan diatas.
+    
+    Modul \textit{spring-oxm} memberikan lapisan abstraksi yang mendukung implementasi pemetaan Objek / XML seperti JAXB, Castor, XMLBeans, JiBX, dan XStream.
+    
+    Dan modul \textit{spring-jms} (\textit{Java Messaging Service}) terdiri dari fitur untuk membuat dan mengolah pesan. Sejak Spring Framework 4.1, modul ini tergabung dalam \textit{spring-messaging}.
     
     \item Spring Web
     
+    Lapisan \textit{Web} terdiri dari modul \textit{spring-web}, \textit{spring-webmvc}, \textit{spring-websocket}, dan \textit{spring-webmvc-portlet}.
+    
+    Modul \textit{spring-web} menyediakan basis integrasi \textit{web-oriented} seperti fungsionalitas pengunggahan \textit{multipart} dan inisialisasi dari IoC \textit{container} menggunakan Servlet \textit{listener} dan \textit{web-oriented application context}. Modul ini juga memuat klien HTTP dan bagian-bagian web dengan dukungan Spring \textit{remote}.
+    
+    Modul \textit{spring-webmvc} (atau biasa dikenal dengan modul \textit{Web-Servlet}) terdiri dari Spring \textit{model-view-controller} (MVC) dan implementasi REST Web Services untuk aplikasi web. \textit{Framework} Spring MVC memberikan pemisahan yang jelas antara domain model dan tampilan, juga mengintegrasikan dua hal tersebut dengan fitur \textit{framework} Spring yang lain.
+    
+    Modul \textit{spring-webmvc-portlet} (atau biasa dikenal dengan modul \textit{Web-Portlet}) menyediakan implementasi MVC yang digunakan pada lingkungan Portlet dan mewarisi fungsionalitas dari modul \textit{spring-webmvc}.
+    
     
     \item Spring Test
+    
+    Modul \textit{spring-test} mendukung test unit dan test integrasi dari komponen-komponen Spring dengan JUnit atau TestNG. Modul ini memberikan pemuatan konsisten dari Spring \textit{ApplicationContext}, dan melakukan \textit{cache} dari konteks itu. Modul ini pun menyediakan objek tiruan yang dapat digunakan untuk melakukan tes dalam logika terisolasi.
     
     
   \end{enumerate}
   
   \item \textit{Servlet Container}
+  
+  Sebelum membahas apa itu \textit{Servlet Container}, perlu diketahui terlebih dahulu apa itu \textit{Web Server}. Dalam beberapa pengertian, \textit{web server} menggunakan protokol HTTP untuk bertukar data. Dengan pengertian yang lebih sederhana, pengguna cukup mengetikan sebuah alamat \textit{web} di \textit{browser} (di sisi \textit{client}), dan mengambil halaman \textit{web} yang akan diakses atau dibaca. Jadi yang dilakukan \textit{server} hanyalah mengirimkan sebuah halaman \textit{web} ke \textit{client}. Perubahan hanya pada protokol HTTP yang menggunakan format spesifik dalam mengirim dan menerima pesan.
+  
+  Lalu apa itu \textit{servlet container}? Sebagaimana dijelaskan diatas bahwa pengguna / \textit{client} hanya dapat meminta halaman \textit{web} yang statis dari \textit{server}. Hal ini kurang begitu bagus jika pengguna ingin membaca halaman \textit{web} hanya berdasarkan input yang demikian. Sehingga ide dasarnya dari \textit{servlet container} adalah menggunakan Java untuk membentuk halaman \textit{web} di sisi \textit{server} secara dinamis. Jadi sebetulnya, \textit{servlet container} adalah bagian penting dari sebuah \textit{web server} yang berinteraksi dengan \textit{servlet}.
+  
+  Pertanyaan berikutnya tentu saja, apa itu \textit{servlet}? \textit{Servlet} sendiri sebetulnya hanyalah sebuah \textit{interface} dengan 3 (tiga) \textit{method} yang menggambarkan siklus hidup sebuah \textit{servlet}, yaitu \textit{init()}, \textit{service()}, dan \textit{destroy()}. Tiap \textit{method} dari \textit{Interface} ini diimplementasikan pada kelas turunannya dan dipanggil oleh \textit{server} pada waktu-waktu tertentu seperti penjelasan berikut :
+  
+  \begin{enumerate}
+    \item \textit{Method init()} dipanggil saat tahap inisialisasi dari siklus hidup \textit{servlet}. \textit{Method} ini mengirimkan objek yang mengimplementasikan \textit{interface} javax.servlet.ServletConfig, yang memungkinkan \textit{servlet} mengakses parameter inisialisasi dari aplikasi web.
+    
+    \item \textit{Method service()} dipanggil setiap ada \textit{request} setelah tahap inisialisasi. Setiap \textit{request} dilayani dalam tiap \textit{thread} masing-masing. \textit{Container web} memanggil \textit{method service()} dari \textit{servlet} setiap ada \textit{request}. \textit{Method service()} menentukan jenis \textit{request} yang ada dan mengirimkannya ke \textit{method} yang akan menangani \textit{request} tersebut.
+    
+    \item \textit{Method desroy()} dipanggil ketika objek \textit{servlet} harus dimusnakan. \textit{Method} ini akan melepaskan semua \textit{resource} yang sedang digunakan.
+  \end{enumerate}
+  
+  Beberapa \textit{servlet container} yang dikenal sebagai proyek \textit{open source} adalah sebagai berikut :
+  
+  \begin{itemize}
+    \item Apacha Tomcat (dahulu namanya Jakarta Tomcat).
+    \item Apache Geronimo
+    \item GlassFish
+    \item JBoss
+    \item Jetty
+  \end{itemize}
+  
+  Sedangkan beberapa proyek komersial dari \textit{servlet container} ini adalah sebagai berikut :
+  
+  \begin{itemize}
+    \item JBoss Enterprise Application Platform
+    \item JRun
+    \item WebLogic Application Server
+    \item Resin Pro
+    \item IBM WebSphere Application Server.
+  \end{itemize}
+  
+  Untuk kebutuhan, menggunakan Apache Tomcat yang bersifat gratis dan \textit{open source} dirasa cukup untuk menangani aplikasi \textit{web services} yang akan dibangun.
+  
 \end{enumerate}
 
 \item \textbf{Perangkat Keras}
@@ -181,9 +235,33 @@ Perangkat keras yang membentuk sistem layanan \textit{web services} ini berjalan
 
 \begin{enumerate}
   \item Server Basis Data
+  
+  Sebuah sistem basis data atau biasa dikenal perangkat lunak basis data, tentu saja harus berjalan diatas sistem operasi dimana sistem operasi pun memerlukan sebuah perangkat keras berupa komputer untuk dapat beroperasi. Karena kebutuhan dari sistem basis data ini untuk menyimpan dan mencatat data-data mengenai objek dan subjek pajak PBB-P2 dan termasuk melayani pencatatan pembayaran yang dilakukan dalam 24 jam sehari, maka diperlukan perangkat keras (\textit{hardware}) berupa \textit{server}. Server ini pun telah dimiliki, karena kegiatan operasi manajemen objek pajak yang dilakukan melalui perangkat lunak SISMIOP telah terhubung ke \textit{server} tempat basis data ini, sehingga tidak perlu biaya tambahan lagi untuk perangkat keras ini.
+  
   \item Server Aplikasi
+  
+  Kondisi aplikasi dalam hal ini \textit{servlet container} atau yang biasa dikenal \textit{web server}, perlu ditempatkan dalam \textit{server} terpisah, melihat kondisi dari \textit{server} basis data yang telah melakukan tugasnya untuk menangani urusan data selama 24 sehari. Tujuannya agar kedua sistem aplikasi ini, yaitu sistem basis data dan sistem \textit{web server} tidak saling memperebutkan \textit{resouce} dari sebuah \textit{server} yang pada akhirnya layanan akan terkendala lambatnya proses respon dari \textit{server}.
+  
+  \textit{Server} ini pun sudah tersedia, sehingga tidak perlu biaya tambahan untuk pengadaan perangkat keras ini. \textit{Server} sebelumnya ditujukan sebagai \textit{server} aplikasi tempat aplikasi SISMIOP disimpan, sehingga komputer \textit{client} perlu melakukan \textit{remote} terlebih dahulu untuk menggunakan aplikasi SISMIOP ini. Namun karena terbentur masalah lisensi \textit{remote desktop} sehingga \textit{server} ini tidak digunakan sebagai \textit{server} aplikasi, melainkan sebagai \textit{server} uji coba dalam pembuatan sistem aplikasi, atau sebagai tempat untuk melakukan uji coba melakukan modifikasi pada aplikasi SISMIOP, termasuk melakukan cetak massal melalui teknologi virtualisasi. Sementara aplikasi SISMIOP dipasangkan pada tiap komputer personal untuk melakukan manipulasi atau perubahan-perubahan data dalam konteks pelayanan PBB-P2.
+  
   \item Router
+  
+  Router digunakan untuk menghubungkan antara jaringan internet dengan jaringan lokal di DPPK, agar \textit{server} aplikasi dapat dihubungi atau diakses dari internet, maka dibutuhkan \textit{router} untuk menerjemahkan, alamat IP mana di jaringan lokal yang akan dihubungi apabila ada \textit{request} dari jaringan internet. Ini adalah salah satu fungsi dari \textit{router}, masih banyak fungsi lainnya seperti menyeleksi atau memfilter \textit{port} mana saja yang dapat diakses dari internet, dan berapa lebar pita (\textit{bandwidth}) yang akan dibatasi. 
+  
   \item VPN Server
+  
+  \textit{VPN} merupakan singkatan dari \textit{Virtual Private Network}, yaitu sebuah koneksi privat melalui jaringan publik (dalam hal ini internet). Dengan pengertian yang lebih luas adalah pada 2 (dua) kata, yaitu :
+  
+  \begin{itemize}
+    \item \textbf{virtual network}, dalam arti jaringan yang terbentuk bersifat virtual. Tidak ada koneksi jaringan secara nyata antara 2 (dua) titik yang berhubungan.
+    
+    \item textbf{private}, yaitu jaringan yang terbentuk bersifat \textit{private} dimana tidak semua orang bisa mengaksesnya. Data yang dikirimkan terenkripsi sehingga tetap rahasia meskipun melalui jaringan publik.
+  \end{itemize}
+  
+  Dengan VPN seolah-olah membuat jaringan di dalam jaringan atau biasa disebut \textit{tunnel}. \textit{Tunneling} adalah suatu cara membuat jalur \textit{private} dengan menggunakan infrastruktur pihak lain. 
+  
+  Beberapa perangkat \textit{Router} yang sekarang tersedia, biasanya menawarkan implementasi VPN Server sekaligus, sehingga menjadikan biaya pengadaan yang dikeluarkan semakin rendah.
+  
 \end{enumerate}
 
 \item \textbf{Akses Internet}
@@ -215,10 +293,28 @@ Dengan menggunakan layanan \textit{cloud} ini, maka bukan hanya melakukan penjag
 \end{enumerate}
 
 
-\section{SUMBER DAYA MANUSIA YANG TERLIBAT DALAM PENGOLAHAN DATA}
+\section{SUMBER DAYA MANUSIA YANG TERLIBAT DALAM SISTEM APLIKASI}
+
+Sumber daya yang terlibat dalam sistem aplikasi \textit{web services} pencatatan pembayaran PBB-P2 ini secara langsung tidak ada, karena komunikasi yang terjadi antara \textit{server} penyedia layanan \textit{web services} yang berada di DPPK, dengan \textit{client} yang berada di Bank sebagai tempat pembayaran terjadi secara sistem aplikasi dengan sistem aplikasi. Adapun sumber daya manusia yang secara tidak langsung terlibat adalah sumber daya manusia yang berada di tempat pembayaran, yang melakukan pencatatan transaksi pembayaran secara aplikasi yang berbeda yang dibangun oleh Bank dengan sistem aplikasi yang akan dibangun yang berupa layanan \textit{web services}.
 
 
-\section{ORGANISASI SISTEM PENGOLAHAN}
+\section{ORGANISASI SISTEM APLIKASI}
+
+Organisasi dari sistem aplikasi ini boleh dikatakan cukup sederhana, karena hanya terdiri dari 3 (tiga) cara komunikasi antara \textit{client} dan \textit{server} dalam melakukan pencatatan transaksi pembayaran oleh wajib pajak atau kuasanya.
+
+Yang pertama adalah proses \textit{inquiry}, yaitu proses dimana \textit{client} melakukan \textit{request} terhadap informasi sebuah objek dan subjek pajak yang biasanya digunakan untuk klarifikasi data antara Surat Pemberitahuan Pajak Terhutang (SPPT) yang diserahkan wajib pajak atau kuasanya, dengan data yang tersimpan dalam basis data SISMIOP, seharusnya kedua data ini sama, baik dari nomor objek pajaknya, nama wajib pajaknya, dan besarnya Pajak Bumi dan Bangunan yang terhutang. 
+
+Bila ditemukan adanya perbedaan di salah satu dari 3 (tiga) komponen tersebut, artinya telah terjadi perubahan di basis data SISMIOP yang disebabkan oleh permohonan pelayanan PBB-P2 di DPPK Kabupaten Brebes, artinya, seharusnya SPPT yang diserahkan ke Bank sebagai tempat pembayaran sudah tidak berlaku, dan akan diterbitkan SPPT terbaru yang menandakan bahwa proses pengajuan pelayanan PBB-P2 telah selesai dilakukan dan SPPT terbarulah yang berlaku sebagai pengganti SPPT yang lama yang telah dicabut.
+
+Transaksi yang kedua adalah pencatatan transaksi pembayaran, modul ini apabila dilakukan \textit{request} terhadapnya, akan langsung melakukan pencatatan pembayaran di tabel tertentu pada basis data SISMIOP dan kemudian memberikan respon berupa informasi data yang telah dilakukan pencatatan pembayaran terhadapnya.
+
+Transaksi yang ketiga adalah modul \textit{reversal}, dimana terjadi pembatalan pembayaran yang dilakukan oleh Bank sebagai tempat pembayaran karena adanya kesalahan, baik kesalahan secara sistem maupun kesalahan SDM. 
+
+Hal-hal yang dimungkinkan terjadi karena kesalahan sistem adalah terputusnya koneksi antara \textit{server} di DPPK dengan \textit{client} di Bank tempat pembayaran. Pada saat \textit{client} mengirimkan sebuah \textit{request} untuk melakukan pencatatan pembayaran, karena koneksi terputus sehingga \textit{server} yang mengirimkan respon data tidak diterima dengan baik oleh \textit{client}, maka \textit{client} seharusnya melakukan \textit{request reversal} terhadap proses ini. Hal lain yang terjadi karena kesalahan sistem adalah apabila tiba-tiba \textit{server} mengalami kerusakan, sedangkan \textit{client} ingin melakukan transaksi pencatatan pembayaran. Dan banyak hal lain 
+
+Karena budaya pembayaran PBB-P2 di Kabupaten Brebes dimana wajib pajak melakukan pembayaran langsung kepada petugas pemungut di tingkat Desa/Kelurahan, maka hal yang sudah biasa dilakukan adalah petugas pemungut tingkat Desa/Kelurahan akan melakukan penyetoran pajak yang dilakukan dalam periode tertentu seperti mingguan atau bulanan, akibat yang ditimbulkan dari pola seperti ini adalah Bank sebagai tempat pembayaran akan menerima pembayaran dalam bentuk massal yang terkadang lebih dari 100 Objek Pajak atau transaksi pada hari yang sama. 
+
+Dari hal tersebut diatas, maka dibutuhkan proses yang cepat untuk melakukan pencatatan pembayaran 
 
 
 \section{WAKTU DAN BIAYA YANG DIBUTUHKAN DALAM PEMBUATAN/PENGEMBANGAN SISTEM PENGOLAHAN DATA SECARA MENYELURUH}
