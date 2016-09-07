@@ -296,7 +296,33 @@ Perangkat keras yang membentuk sistem layanan \textit{web services} ini berjalan
   
   Untuk \textit{site-to-site VPN} melalui internet, ketika jaringan sudah terkoneksi dengan internet, \textit{router} melangsungkan paket ke \textit{router} lain melalui koneksi VPN. Bagi \textit{router}, koneksi VPN beroperasi seperti \textit{data-link layer}.
   
-  lanjutkan ceritanya di sini -> 
+  Istilah \textit{VPN Tunneling} adalah teknologi jaringan yang memungkinkan enkapsulasi dari satu tipe paket protokol ke dalam \textit{datagram} dengan protokol yang berbeda. Sebagai contoh, koneksi VPN Windows dapat menggunakan paket \textit{Point-to-Point Tunneling Protocol} (PPTP) untuk enkapsulasi dan mengirimkan melalui jaringan privat, seperti TCP/IP melalui jaringan publik seperti internet.
+  
+  Bagi PPTP dan \textit{Layer Two Tunneling Protocol} (L2TP), \textit{tunnel} mirip seperti \textit{session}. Masing-masing ujung \textit{tunnel} harus sepakat atas \textit{tunnel} dan harus menegosiasikan variabel konfigurasi, seperti pemberian alamat, enkripsi, atau kompresi. Kebanyakan kasus, data dikirim melalui \textit{tunnel} dengan menggunakan protokol berbasis \textit{datagram}. Manajemen protokol \textit{tunnel} digunakan untuk membuat, memelihara, dan mengakhiri \textit{tunnel}.
+  
+  Setelah \textit{tunnel} terbentuk, data dapat dikirim. Baik \textit{client} atau \textit{server} tunnel menggunakan protokol transfer data \textit{tunnel} untuk menyiapkan data yang akan dikirim. Ada 2 (dua) tipe pada \textit{tunneling} ini, yaitu :
+  
+  \begin{itemize}
+    \item \textit{Voluntary Tunneling}
+    
+    Pengguna atau komputer \textit{client} dapat meminta layanan VPN untuk melakukan konfigurasi dan membuat \textit{voluntary tunnel}. Dalam hal ini pengguna atau komputer \textit{client} adalah \textit{tunnel endpoint} dan bertindak sebagai \textit{tunnel client}.
+    
+    \textit{Voluntary Tunneling} terjadi ketika komputer \textit{client} atau \textit{routing server} membuat koneksi virtual dengan \textit{server tunnel}. Untuk menyempurnakan agar koneksi ini terjadi, perangkat lunak \textit{tunneling client} dan protokol \textit{tunneling} yang tepat harus terpasang pada komputer \textit{client}.
+    
+    Pada kondisi \textit{dial-up}, \textit{client} perlu melakukan \textit{dial-up} terlebih dahulu ke jaringan sebelum \textit{client} dapat membangun \textit{tunnel}. Ini kasus yang sering terjadi. Contoh yang bagus dari kasus \textit{dial-up} ini adalah pengguna internet \textit{dial-up}, yang mengharuskan pengguna melakukan \textit{dial} ke ISP untuk mendapatkan koneksi internet sebelum \textit{tunnel} yang melalui internet dapat dibangun.
+    
+    Untuk \textit{client} yang terhubung dalam jaringan LAN, sudah ada koneksi jaringan yang memberikan \textit{routing} enkapsulasi \textit{payload} to server \textit{tunnel} LAN. Ini adalah salah satu contoh dimana \textit{client} menggunakan koneksi \textit{always-on broadband internet}.
+    
+    Ada kekeliruan bahwa koneksi VPN membutuhkan koneksi \textit{dial-up}. Yang sebetulnya dibutuhkan oleh koneksi VPN adalah alamat IP antara \textit{VPN Client} dan \textit{VPN Server}. Beberapa \textit{client} (seperti komputer rumahan) menggunakan \textit{dial-up} untuk mendapatkan koneksi internet untuk membangun transport IP. Ini adalah langkah pendahuluan pada tahap persiapan pembuatan \textit{tunnel} dan bukan merupakan bagian dari protokol \textit{tunnel} itu sendiri.
+    
+    \item \textit{Compulsory Tunneling}
+    
+    Pada \textit{compulsory tunneling}, VPN \textit{remote access server} melakukan konfigurasi dan membuat \textit{compulsory tunnel}. Pada \textit{compulsory tunnel}, komputer pengguna bukan \textit{tunnel endpoint}. Perangkat lain seperti \textit{server dial-up}, yang berada diantara komputer pengguna dan \textit{server tunnel} adalah \textit{tunnel endpoint} dan beraksi sebagai \textit{tunnel client}.
+  \end{itemize}
+  
+  \textit{Point-to-Point Tunneling Protocol} (PPTP) akan mengenkapsulasi frame \textit{Point-to-Point Protocol} (PPP) kedalam IP \textit{datagram} untuk nantinya dikirimkan melalui jaringan berbasis IP, seperti internet atau melalui intranet privat. PPTP menggunakan koneksi TCP. PPTP sebetulnya adalah hasil modifikasi dari \textit{Generic Routing Encapsulation} (GRE) untuk mengenkapsulasi frame PPP menjadi data \textit{tunnel}. Data dari frame PPP yang dienkapsulasi dapat di enkripsi, kompresi, atau dilakukan keduanya secara bersamaan.
+  
+  lanjut ke --
   
   \begin{verbatim}
   https://technet.microsoft.com/en-us/library/cc779919(v=ws.10).aspx
@@ -435,8 +461,13 @@ Kebutuhan lain akan peralatan komunikasi ini adalah \textit{Router} dan \textit{
 \textit{VPN Server} sendiri adalah \textit{server} yang melakukan manajemen terhadap jaringan virtual yang bersifat privat. Karena kondisi komunikasi pencatatan pembayaran PBB-P2 antara DPPK dan Bank sebagai tempat pembayaran dilakukan melalui jalur internet, maka diperlukan sebuah sistem agar data yang dikirimkan aman. 
 
 
-\section{MANFAAT DAN DAMPAK PENGOLAHAN DATA}
+\section{MANFAAT DAN DAMPAK DARI PENGEMBANGAN SISTEM APLIKASI}
 
+Manfaat dan dampak yang ditimbulkan dari pengembangan sistem aplikasi ini adalah terbentuknya data yang konsisten sehingga data dapat dioleh baik secara periodik maupun \textit{realtime}, tidak seperti sekarang yang harus ada proses sinkronisasi data antara DPPK dengan Bank sebagai tempat pembayaran.
+
+Manfaat lain yang didapat adalah karena data transaksi pembayaran dicatatkan langsung dalam basis data SISMIOP, maka realisasi dapat disajikan secara \textit{realtime}, termasuk perubahan-perubahan yang terjadi dalam rangka pelayanan PBB-P2.
+
+Manfaat lain adalah dapat terbukanya kerjasama dengan Bank yang lain sebagai tempat pembayaran sehingga memperluas cakupan wilayah tempat pembayaran sehingga mempermudah wajib pajak melakukan pembayaran PBB-P2 terutama bagi wajib pajak yang berada di luar wilayah Kabupaten Brebes, atau Provinsi Jawa Tengah.
 
 
 \end{document}
