@@ -13,10 +13,36 @@
 \usepackage{float}
 \usepackage{gensymb}  
 \usepackage{listings}
+\usepackage{color}
 \usepackage{mathtools} % atau \usepackage{amsmath}
 \renewcommand{\baselinestretch}{1.5}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolor},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  stringstyle=\color{codepurple},
+  basicstyle=\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2
+}
+
+\lstset{style=mystyle}
 
 
 \begin{document}
@@ -250,17 +276,31 @@ Perangkat keras yang membentuk sistem layanan \textit{web services} ini berjalan
   
   \item VPN Server
   
-  \textit{VPN} merupakan singkatan dari \textit{Virtual Private Network}, yaitu sebuah koneksi privat melalui jaringan publik (dalam hal ini internet). Dengan pengertian yang lebih luas adalah pada 2 (dua) kata, yaitu :
+  Sebelum membahas apa itu \textit{VPN Server}, perlu diperhatikan bagaimana arsitektur VPN ini bekerja. VPN atau lebih jelasnya \textit{Virtual Private Network} dapat membantu mengamankan lalu lintas data privat melalui jaringan publik seperti Internet. VPN memberikan pengamanan untuk enkripsi dan enkapsulasi lalu lintas jaringan privat dan berpindah melalui jaringan dibawahnya. Data di enkripsi untuk langkah pengamanan, dan paket yang dicuri pada jaringan publik tidak dapat di dekripsi tanpa kunci enkripsi yang tepat. Data pun di enkapsulasi atau dibungkus dengan \textit{IP header} berisi informasi \textit{routing}.
   
-  \begin{itemize}
-    \item \textbf{virtual network}, dalam arti jaringan yang terbentuk bersifat virtual. Tidak ada koneksi jaringan secara nyata antara 2 (dua) titik yang berhubungan.
-    
-    \item textbf{private}, yaitu jaringan yang terbentuk bersifat \textit{private} dimana tidak semua orang bisa mengaksesnya. Data yang dikirimkan terenkripsi sehingga tetap rahasia meskipun melalui jaringan publik.
-  \end{itemize}
+  VPN membantu pengguna untuk bekerja dari rumah, dijalan, atau di lobi kantor untuk langsung terhubung secara aman ke \textit{server} perusahaan menggunakan internet. Dari sisi pengguna akan terlihat bahwa, VPN adalah koneksi dari titik ke titik antara komputer pengguna dengan \textit{server} perusahaan. Koneksi jaringan aslinya, internet, tidak penting bagi pengguna karena data terlihat seperti dikirimkan dari jalur privat.
   
-  Dengan VPN seolah-olah membuat jaringan di dalam jaringan atau biasa disebut \textit{tunnel}. \textit{Tunneling} adalah suatu cara membuat jalur \textit{private} dengan menggunakan infrastruktur pihak lain. 
+  Ada beberapa cara menggunakan VPN. Cara yang paling umum adalah \textit{Remote Access VPN}, ketika pengguna melakukan akses jaringan privat (yang biasa dikenal dengan LAN) melalui internet menggunakan akses koneksi VPN. Kondisi lain yaitu kantor cabang melakukan koneksi VPN ke perusahaan baik dengan koneksi yang tetap maupun berdasarkan kebutuhan (on-demand site-to-site) yang biasa dikenal dengan \textit{router-to-router VPN connection}.
   
-  Beberapa perangkat \textit{Router} yang sekarang tersedia, biasanya menawarkan implementasi VPN Server sekaligus, sehingga menjadikan biaya pengadaan yang dikeluarkan semakin rendah.
+  Tiap cara diatas dapat diimplementasikan untuk memberikan sambungan atau koneksi melalui jaringan publik, seperti internet, atau melalui intranet. Koneksi VPN juga dapat diimplementasikan untuk menghasilkan komunikasi data yang aman antara perusahaan yang saling bekerja sama.
+  
+  \textit{Remote access VPN} sendiri terbentuk oleh akses \textit{client} secara \textit{remote}, dimana sebuah komputer yang melakukan koneksi ke jaringan private dari luar jaringan lokal. \textit{VPN Server} memberikan akses ke sumber daya jaringan dimana \textit{VPN Server} terhubung. Seluruh paket yang dikirim melalui koneksi VPN akan berpangkal di \textit{VPN client}. \textit{VPN Client} melakukan otentikasi dirinya ke \textit{VPN Server} dan sebagai timbal baliknya, \textit{VPN Serer} akan mengotentikasi dirinya ke \textit{VPN Client}.
+  
+  Sedangkan \textit{site-to-site VPN} menghubungkan satu atau lebih jaringan privat. Sebagai contoh, \textit{site-to-site VPN} memungkinkan sebuah organisasi memiliki koneksi dengan dengan jaringan yang terpisah, atau memiliki koneksi dengan organisasi lain melalui koneksi internet. Jalur koneksi VPN melalui internet secara logika beroperasi seperti \textit{Wide Area Network} (WAN).
+  
+  \textit{VPN Server} menyediakan rute koneksi ke jaringan dimana \textit{VPN Server} terhubung. Pada \textit{site-to-site VPN}, paket yang beredar pada koneksi VPN tidak berpangkal di \textit{router}. \textit{Router} penghubung (dalam hal ini \textit{VPN Client}) mengotentikasi dirinya ke \textit{router} penjawab (yaitu \textit{VPN Server}), kemudian sebagai balasan, \textit{VPN Server} atau \textit{router} penjawab akan mengotentikasi dirinya ke \textit{router} penghubung.
+  
+  Dengan menggunakan koneksi VPN berbasis internet, sebuah organisasi dapat mengatasi jarak yang jauh dengan mengambil kelebihan dari ketersediaan internet secara global.
+  
+  Untuk \textit{Remote access VPN} melalui internet memungkinkan \textit{remote access client} memulai dengan koneksi \textit{dial-up} ke ISP lokal, bukan langsung ke perusahaan. Dengan menggunakan koneksi fisik ke ISP lokal, \textit{remote access client} memulai koneksi VPN melalui internet ke \textit{VPN Server} perusahaan. Ketika koneksi VPN terbentuk, \textit{remote access client} dapat mengakses sumber daya pada intranet perusahaan.
+  
+  Untuk \textit{site-to-site VPN} melalui internet, ketika jaringan sudah terkoneksi dengan internet, \textit{router} melangsungkan paket ke \textit{router} lain melalui koneksi VPN. Bagi \textit{router}, koneksi VPN beroperasi seperti \textit{data-link layer}.
+  
+  lanjutkan ceritanya di sini -> 
+  
+  \begin{verbatim}
+  https://technet.microsoft.com/en-us/library/cc779919(v=ws.10).aspx
+  \end{verbatim}
   
 \end{enumerate}
 
@@ -314,10 +354,85 @@ Hal-hal yang dimungkinkan terjadi karena kesalahan sistem adalah terputusnya kon
 
 Karena budaya pembayaran PBB-P2 di Kabupaten Brebes dimana wajib pajak melakukan pembayaran langsung kepada petugas pemungut di tingkat Desa/Kelurahan, maka hal yang sudah biasa dilakukan adalah petugas pemungut tingkat Desa/Kelurahan akan melakukan penyetoran pajak yang dilakukan dalam periode tertentu seperti mingguan atau bulanan, akibat yang ditimbulkan dari pola seperti ini adalah Bank sebagai tempat pembayaran akan menerima pembayaran dalam bentuk massal yang terkadang lebih dari 100 Objek Pajak atau transaksi pada hari yang sama. 
 
-Dari hal tersebut diatas, maka dibutuhkan proses yang cepat untuk melakukan pencatatan pembayaran 
+Dari hal tersebut diatas, maka dibutuhkan proses yang cepat untuk melakukan pencatatan pembayaran, maka dibutuhkan strategi dalam komunikasi antara aplikasi dengan basis data agar prosesnya berjalan optimal. Hal yang mungkin untuk optimalisasi hal ini adalah dengan \textit{stored procedure}.
+
+\textit{Stored procedure} adalah sebuah prosedur layaknya sub-program di dalam bahasa pemrograman reguler yang tersimpan di dalam katalog basis data. Karena berada dalam katalog basis data Oracle, jadi sebetulnya \textit{stored procedure} ini berisi sekumpulan perintah SQL yang memiliki nama dan kegunaan tertentu.
+
+Beberapa keuntungan dalam penggunaan \textit{stored procedure} ini yaitu :
+
+\begin{itemize}
+  \item Meningkatkan performa, karena \textit{stored procedure} biasanya menggunakan bahasa \textit{native} dari basis data yaitu SQL (\textit{Structured Query Language}), sehingga tugas untuk menerjemahkan atau memproses data sudah selayaknya berada pada sistem basis data sehingga sistem aplikasi tidak terbebani dalam pengolahan basis datanya.
+  
+  \item Mereduksi lalu lintas data pada jaringan. Karena pemanggilan \textit{stored procedure} hanya menggunakan beberapa karakter saja untuk membentuk nama prosedur beserta parameternya, maka tentu saja ini jauh lebih kecil dalam menggunakan \textit{bandwidth} jaringan dibandingkan dengan penggunaan SQL murni yang melakukan perintah \textit{query} dari beberapa tabel sekaligus.
+  
+  \item \textit{Reusable}. Artinya dapat digunakan oleh aplikasi apapun tanpa harus membuatnya ulang. Setiap aplikasi yang akan melakukan olah data yang sama pada basis data tidak perlu menyusun \textit{query} dari awal, melainkan cukup menggunakan \textit{stored procedure} yang sudah ada dalam katalog basis data. Begitu pula apabila ada perubahan aturan bisnis, hal yang perlu diubah apabila menyangkut manipulasi data pada basis data, maka cukup 
+  
+  \item Meningkatkan kontrol keamanan. Dalam kondisi tanpa penggunaan \textit{stored procedure}, \textit{query} akan dikirimkan dari aplikasi ke sistem basis data dalam bentuk teks mentah, sehingga parameternya dapat dimanipulasi dan menyebabkan kerusakan basis data yang cukup parah. Hal ini biasa dikenal dengan serangan \textit{SQL Injection}.
+  
+  Sebuah contoh dari serangkat \textit{SQL Injection} ini adalah sebagai berikut :
+  
+  Apabila menggunakan \textit{query} (SQL) biasa terhadap basis data, maka langkah yang diambil untuk melakukan pengecekan data \textit{password} dalam basis data akan menggunakan perintah berikut :
+  
+  \begin{lstlisting}[language=sql]
+    select * from user where username = :username
+  \end{lstlisting}
+  
+  Yang artinya, mengambil seluruh informasi tentang \textit{user} entah itu nama pengguna, \textit{password}, tanggal lahir, atau seluruh informasi yang berkaitan dengan \textit{user} dengan filter bahwa \textit{username} harus sama dengan apa yang dimasukkan oleh pengguna ke variabel \texttt{:username}. Kondisi akses ini akan diterima dan \textit{user} diijinkan masuk ke dalam aplikasi apabila ada \textit{user} dengan \textit{username} yang tersimpan pada basis data. Namun seseorang dapat mengisikan variabel \texttt{:username} seperti ini :
+  
+  \begin{lstlisting}[language=sql]
+    ''; select * from user
+  \end{lstlisting}
+  
+  Tanda petik tunggak 2 (dua) kali artinya memberikan parameter kosong ke variabel yang dibutuhkan, sedangkan kode tanda titik koma di awal baris menyatakan bahwa ada perintah sebelumnya yang harus dijalankan, kemudian jalankan perintah berikutnya, dimana dalam konteks ini adalah \texttt{select * from user}. Yang artinya mengambil seluruh data \textit{user} tanpa filter sama sekali, ambil seluruh data \textit{user} yang berada pada basis data. Kemudian kode SQL akan dieksekusi seperti ini ;
+  
+  \begin{lstlisting}[language=sql]
+    select * from user where username = ''; select * from user
+  \end{lstlisting}
+  
+  Yang artinya, apapun hasil dari \textit{query} awal, aplikasi akan secara otomatis dapat diakses tanpa melakukan proses \textit{login} yang benar, karena data \textit{user} dan \textit{password} nya dapat diakses tanpa menggunakan filter dengan \textit{query} yang kedua.
+  
+  Akan lebih berbahaya apabila ada pengguna yang menambahkan atau mengisikan variabel \texttt{:username} dengan perintah berikut :
+  
+  \begin{lstlisting}[language=sql]
+    ''; drop database {nama database}
+  \end{lstlisting}
+  
+  Akibatnya seluruh data yang tersimpan pada basis data akan hilang tanpa diketahui apa penyebabnya.
+  
+\end{itemize}
 
 
-\section{WAKTU DAN BIAYA YANG DIBUTUHKAN DALAM PEMBUATAN/PENGEMBANGAN SISTEM PENGOLAHAN DATA SECARA MENYELURUH}
+\section{WAKTU DAN BIAYA YANG DIBUTUHKAN DALAM PEMBUATAN/PENGEMBANGAN SISTEM APLIKASI SECARA MENYELURUH}
+
+Karena keterbatasan sumber daya manusia, dalam hal ini pemrogram \textit{programmer}, yaitu hanya 1 (satu) orang, maka waktu yang dibutuhkan untuk membangun sistem aplikasi secara menyeluruh akan diperkirakan selama 3 (tiga) bulan dan dikerjakan pada jam kerja. Kurang lebih waktu yang dibutuhkan akan melihat dari kendala-kendala yang ditemui pada saat operasional dilakukan pengembangan sistem aplikasi ini. Namun perkembangannya dapat dilihat secara mingguan, bahkan harian pada \textit{server repository} Github.
+
+Github sendiri sebetulnya memiliki basis Git, Git sendiri sebetulnya adalah \textit{version control system}, yaitu sistem yang melakukan kontrol terhadap versi sistem aplikasi, yang mengatur dan menyimpan revisi terhadap sebuah proyek pengembangan sitem aplikasi. 
+
+Walaupun seringkali digunakan untuk menyimpan kode program, Git sebenarnya mampun untuk mengatur jenis berkas yang lain seperti dokumen \textit{Word} ataupun proyek \textit{Final Cut}.
+
+Beberapa pendahulu Git seperti CVS dan Subversion memiliki \textit{repository} terpusat dari seluruh berkas yang berkaitan dengan proyek. Ketika seorang pengembang melakukan perubahan terhadap kode, perubahan ini akan tercatat langsung di \textit{repository} pusat. Namun dengan \textit{version control system} terdistribusi seperti Git, jika ingin melakukan perubahan pada proyek, perlu menyalin seluruh proyek ke komputer yang digunakan terlebih dahulu. Lakukan perubahan pada hasil duplikasi di komputer lokal, kemudian kirimkan perubahannya ke \textit{server} pusat. Ini menjadikan pengiriman perubahan ke \textit{server} pusat menjadi potongan-potongan kecil sehingga tidak perlu melakukan koneksi dengan \textit{server} setiap kali akan melakukan perubahan.
+
+Github sendiri adalah layanan \textit{hosting repository} untuk Git, tetapi Github menambahkan banyak sekali fitur. Jika Git adalah perkakas yang berbasis \textit{command line}, seperti menggunakan DOS pada Windows atau Shell pada Linux, maka Github menyediakan tampilan grafis berbasis \textit{web}. Github pun memberikan kontrol akses dan beberapa fitur kolaborasi, seperti \textit{wiki} dan perkakas manajemen tugas dasar untuk setiap proyek.
+
+Semboyan dari fungsionalitas Github sendiri adalah \textit{"forking"}, yaitu menyalin atau membuat duplikasi \textit{repository} dari pengguna yang satu ke pengguna yang lain. Ini memungkinkan pengambilan proyek yang seorang pengguna tidak memiliki akses untuk merubahnya, kemudian melakukan perubahan atau modifikasi proyek pada akunnya sendiri. Jika kemudian akan membagikan hasilnya, dapat dilakukan \textit{"pull request"} ke pemilik asli proyek tersebut. Yang kemudian seorang pengguna dapat menekan sebuah tombol yang menggabungkan perubahan-perubahan yang terjadi ke proyek asalnya.
+
+Ketiga fitur ini (yaitu \textit{fork}, \textit{pull request}, dan \textit{merge}) menjadikan Github tangguh. Sebelum adanya Github, jika ingin melakukan kontribusi ke proyek \textit{open source}, perlu melakukan unduh penuh kode sumber proyek, kemudian melakukan perubahan atau modifikasi pada komputer lokal, membuat daftar perubahan yang biasa dikenal dengan \textit{"patch"}, kemudian mengirimkan \textit{email} yang berisi daftar \textit{patch} ke seseorang atau tim yang menangani pemeliharaan proyek. Kemudian orang-orang yang menangani pemeliharaan proyek ini melakukan evaluasi terlebih dahulu terhadap \textit{patch} yang diterima, kemudian memutuskan apakah akan menggabungkan perubahannya kedalam sistem aplikasi yang ada atau tidak.
+
+Disinilah efek jaringan berperan pada Github. Ketika seseorang melakukan \textit{pull request}, orang-orang yang bertugas melakukan pemeliharaan proyek dapat melihat profil dari orang yang melakukan \textit{pull request}, termasuk apa saja yang telah orang ini kontribusikan di Github. Jika \textit{patch} diterima, orang yang melakukan \textit{pull request} mendapatkan penghargaan di situs asli proyek tersebut, kondisi ini pun akan muncul di profil orang yang melakukan kontribusi. Ini seperti ikhtisar yang membantu orang-orang yang melakukan pemeliharaan proyek untuk menentukan bagaimana reputasi kontributor tersebut. Semakin banyak orang dan proyek di Github, semakin baik gambaran ide yang para pemelihara proyek akan mendatangkan kontributor yang potensial. \textit{Patch} juga dapat didiskusikan secara publik di Github.
+
+Bahkan bagi orang-orang yang melakukan pemeliharaan yang tidak menggunakan \textit{interface} Github, Github dapat membuat manajemen kontribusi semakin mudah, cukup mengunduh \textit{patch}, kemudian melakukan \textit{merge} pada \textit{command line}. Tetapi kelebihan lain dengan menggunakan \textit{interface} Github adalah Github menyediakan tempat terpusat bagi para kontributor melakukan diskusi terhadap \textit{patch} yang masuk.
+
+Selain menawarkan \textit{repository} publik, Github juga menyediakan \textit{repository} privat bagi skala \textit{enterprise} dimana biasanya kode adalah hak intelektual perusahaan. Solusi ini tentu saja tidak dapat mengambil sisi positif dari efek jaringan Github, tetapi dapat memanfaatkan sisi positif dari fitur kolaborasi. Beginilah cara Github mencari sumber dana, dan Github tidak sendirian di pangsa pasar seperti ini.
+
+Sumber penghasilan Github mungkin dari fasilitas \textit{repository} private ini, tetapi jiwanya ada pada \textit{repository} publik. Yang lebih penting adalah bahwa Github telah menjadi perpustakaan Alexandria bagi contoh kode. Karena Git mencatat perubahan-perubahan, \textit{programmer}, entah itu pemula atau yang sudah mahir, dapat melihat langkah-langkah apa saja yang telah diambil oleh \textit{developer} terbaik di dunia dan mencari tahu bagaimana mereka mengambil solusi atas permasalahan-permasalahan yang muncul. 
+
+Dari sisi biaya yang dibutuhkan, maka pengembangan sistem aplikasi ini sebetulnya tidak membutuhkan biaya sama sekali, hanya saja faktor pendukung sebagai alat komunikasi ke Bank sebagai tempat pembayaran perlu dimatangkan kembali, mengingat koneksi internet yang sekarang terpasang memiliki spesifikasi \textit{shared bandwidth} dimana \textit{bandwidth} yang diberitakan dalam promosi penyedia layanan internet, tidak sepenuhnya didapatkan melainkan dibagi berdasarkan jumlah pengguna yang mengambil paket yang sama. Ini berbeda dengan paket atau layanan \textit{dedicated} yang ditawarkan oleh penyedia jasa layanan internet, yang biasanya layanan \textit{dedicated} memiliki kapasitas \textit{bandwidth} yang murni seperti pada promosi yang ditawarkan. Dan biasanya akan diberikan alamat IP Publik yang dapat dimanfaatkan sebagai identitas alamat jaringan DPPK Kabupaten Brebes.
+
+Layanan \textit{dedicated} ini pun jauh lebih mahal daripada layanan biasa, karena memang pelayanan dan kualitas yang ditawarkan berbeda.
+
+Kebutuhan lain akan peralatan komunikasi ini adalah \textit{Router} dan \textit{VPN Server} yang biasanya disediakan oleh satu alat yang tergabung. Router sendiri berfungsi sebagai penghubung komunikasi antara 2 (dua) jaringan secara logika dan fisik, karena alamat IP jaringan dari misalkan 192.168.2.0 dengan \textit{netmask} 255.255.255.0 akan berbeda alamat IP jaringan 192.168.1.0 dengan \textit{netmask} 255.255.255.0. Disinilah fungsi \textit{router}, yaitu untuk menghubungkan kedua jaringan seperti ini agar dapat saling berkomunikasi dan saling mengirimkan data.
+
+\textit{VPN Server} sendiri adalah \textit{server} yang melakukan manajemen terhadap jaringan virtual yang bersifat privat. Karena kondisi komunikasi pencatatan pembayaran PBB-P2 antara DPPK dan Bank sebagai tempat pembayaran dilakukan melalui jalur internet, maka diperlukan sebuah sistem agar data yang dikirimkan aman. 
 
 
 \section{MANFAAT DAN DAMPAK PENGOLAHAN DATA}
