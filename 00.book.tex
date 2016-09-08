@@ -322,11 +322,23 @@ Perangkat keras yang membentuk sistem layanan \textit{web services} ini berjalan
   
   \textit{Point-to-Point Tunneling Protocol} (PPTP) akan mengenkapsulasi frame \textit{Point-to-Point Protocol} (PPP) kedalam IP \textit{datagram} untuk nantinya dikirimkan melalui jaringan berbasis IP, seperti internet atau melalui intranet privat. PPTP menggunakan koneksi TCP. PPTP sebetulnya adalah hasil modifikasi dari \textit{Generic Routing Encapsulation} (GRE) untuk mengenkapsulasi frame PPP menjadi data \textit{tunnel}. Data dari frame PPP yang dienkapsulasi dapat di enkripsi, kompresi, atau dilakukan keduanya secara bersamaan.
   
-  lanjut ke --
+  \textit{Tunnel endpoint} harus terotentikasi sebelum koneksi \textit{VPN Tunnel} yang aman terjadi. Pengguna yang membuat akses VPN dapat menggunakan \textit{password}, \textit{biometric}, otentikasi dua arah, atau metode kriptografi yang lain. Pada \textit{tunnel network-to-network} biasanya menggunakan \textit{password} atau sertifikat digital. \textit{Tunnel} ini akan menyimpan kunci secara permanen agar \textit{tunnel} dapat terhubung secara otomatis tanpa bergantung kepada administrator.
   
-  \begin{verbatim}
-  https://technet.microsoft.com/en-us/library/cc779919(v=ws.10).aspx
-  \end{verbatim}
+  VPN tidak dapat membuat koneksi \textit{online} melalui jaringan publik sepenuhnya anonim, tetapi biasanya meningkatkan kerahasiaan dan keamanan. Untuk menjaga informasi rahasia yang bersifat pribadi, VPN hanya memperbolehkan akses \textit{remote} yang terotentikasi menggunakan protokol \textit{tunneling} dan teknik enkripsi.
+  
+  Beberapa protokol VPN yang aman adalah sebagai berikut :
+  
+  \begin{itemize}
+    \item \textit{Internet Protocol Security} (IPsec), yang awalnya dibangun oleh \textit{Internet Engineering Task Force} (IETF) untuk IPv6, dimana IPSec ini wajib diimplementasikan sebagai standar dari IPv6 dengan RFC 6434 dimana sebelumnya hanya direkomendasikan. Standar ini pun digunakan secara luas pada IPv4 dan L2TP. Desain dari IPSec ini memenuhi banyak kebutuhan seperti otentikasi, integritas, dan konfidensial. IPSec menggunakan enkripsi, mengenkapsulasi paket IP didalam paket IPSec. Penguraian enkapsulasi terjadi pada titik akhir dari \textit{tunnel}, dimana paket IP yang asli di dekripsi dan diteruskan ke tujuannya.
+    
+    \item \textit{Transport Layer Security} (SSL/TLS) dan membuat \textit{tunnel} seluruh lalu lintas jaringan (seperti yang dilakukan pada proyek OpenVPN) atau mengamankan koneksi perorangan. SSL VPN dapat membuat koneksi dari lokasi dimana IPSec tidak dapat menjangkaunya melalui \textit{Network Address Translation} dan aturan \textit{firewall}.
+    
+    \item \textit{Datagram Transport Layer Security} (DTLS) yang biasanya digunakan pada Cisco AnyConnect VPN dan OpenConnect VPN untuk memberikan solusi atas permasalahan SSL/TLS ketika \textit{tunneling} dengan protokol UDP.
+    
+    \item \textit{Microsoft Point-to-Point Encryption} (MPPE) bekerja dengan \textit{Point-to-Point Tunneling Protocol} (PPTP).
+    
+    \item \textit{Secure Shell} (SSH) VPN, OpenSSH menyediakan \textit{VPN tunneling} untuk mengamankan koneksi \textit{remote} ke jaringan baik publik maupun lokal. \textit{Server} OpenSSH menyediakan \textit{tunnel} yang aktif secara bersamaan dalam jumlah yang terbatas.
+  \end{itemize}
   
 \end{enumerate}
 
